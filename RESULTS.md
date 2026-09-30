@@ -5,6 +5,7 @@ Brier ALC, lower is better. Always predicting 0.5 scores 0.25.
 | date | submission | file | local ALC (sim.py) | platform ALC | notes |
 |---|---|---|---|---|---|
 | 2026-09-30 | 953625 | irt_v1.zip | 0.2203 | 0.193979 | shrunk logistic, ability by model name, 9 subject-benchmark pairs in the formative sample |
+| 2026-09-30 | 953862 | irt_v2.zip | 0.2171 | pending | v1 plus online offsets for items that share an item_features tag; text features tested and left off (0.2276 locally) |
 
 Platform feedback for 953625, mean Brier score over the 9 pairs at each label budget:
 
