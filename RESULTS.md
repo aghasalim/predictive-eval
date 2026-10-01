@@ -37,3 +37,9 @@ I submitted the same two zips again, alternating them, so each model has five sc
 Mean platform ALC is 0.1944 for v1 and 0.1835 for v2, a difference of 0.0109 in v2's favour with a standard error of 0.0086. Subtracting each submission's own budget 0 score, which is the same model for both and so measures how hard the sample was, gives a difference of 0.0094 in v2's favour with a standard error of 0.0075. Both point the same way as the local simulation, and both are a little over one standard error, so they are a lean, not a result. The worry from the first v2 submission did not hold up: averaged over its submissions, v2 improves more from budget 0 to budget 1 than v1 does (0.0200 against 0.0116), with a standard error of 0.0134.
 
 v2's scores spread much more than v1's (standard deviation 0.0191 against 0.0026). The samples differ between submissions, so part of that is the draw, but the tag offsets probably add to it.
+
+## v3 and an environment probe, 2026-10-01
+
+v3 adds an online offset for each question, learned from other subjects' revealed labels on the same question. Each pair splits its items on its own, so at budget 31 between 13% and 72% of evaluation items had already been labelled for another subject on four of the five public benchmarks (none on swe_rebench, which has one subject). `paired3.py` compares it with the offsets switched off, which is v2, on identical draws: 0.2146 against 0.2171 at sd_i 2.0, a difference of 0.0025 with a standard error of 0.0004, better in 16 of 20 cells and worse in none (the 4 ties are swe_rebench). Submitted as 954619.
+
+954620 is not a predictor. It imports numpy, torch and sentence-transformers and loads all-MiniLM-L6-v2 through models.txt at import time, then predicts 0.5. If it finishes, those are available in the scoring container; if it fails, at least one is not.
