@@ -22,3 +22,18 @@ Platform feedback for 953862 (v2), mean Brier score over its 9 pairs:
 | mean Brier | 0.2393 | 0.2424 | 0.2155 | 0.2051 | 0.1900 | 0.1878 |
 
 v1 and v2 make identical predictions at budget 0, because the tag offsets need revealed labels. Their budget 0 scores still differ, 0.2259 against 0.2393, so that gap of about 0.013 is the formative sample alone. Only one pair (subject 681510, benchmark 119137) appears in both samples: 0.278 for v1 and 0.298 for v2. One submission each cannot separate the two models. The one sign against v2 is that it got worse from budget 0 to budget 1 (0.2393 to 0.2424) while v1 improved (0.2259 to 0.2066), which suggests the tag offsets move too far on the first label.
+
+## Repeat submissions, 2026-10-01
+
+I submitted the same two zips again, alternating them, so each model has five scores on freshly drawn samples. `repeats.py` holds the numbers and the comparison.
+
+| model | submissions | platform ALC |
+|---|---|---|
+| v1 | 953625, 953903, 953905, 953907 | 0.193979, 0.193899, 0.191791, 0.198023 |
+| v2 | 953862, 953902, 953904, 953906, 953908 | 0.213320, 0.173103, 0.179449, 0.163046, 0.188681 |
+
+953899 (v1) is marked Failed by the platform although it shows 0.192684, so I left it out.
+
+Mean platform ALC is 0.1944 for v1 and 0.1835 for v2, a difference of 0.0109 in v2's favour with a standard error of 0.0086. Subtracting each submission's own budget 0 score, which is the same model for both and so measures how hard the sample was, gives a difference of 0.0094 in v2's favour with a standard error of 0.0075. Both point the same way as the local simulation, and both are a little over one standard error, so they are a lean, not a result. The worry from the first v2 submission did not hold up: averaged over its submissions, v2 improves more from budget 0 to budget 1 than v1 does (0.0200 against 0.0116), with a standard error of 0.0134.
+
+v2's scores spread much more than v1's (standard deviation 0.0191 against 0.0026). The samples differ between submissions, so part of that is the draw, but the tag offsets probably add to it.
