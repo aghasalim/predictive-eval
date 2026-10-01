@@ -45,3 +45,9 @@ v3 adds an online offset for each question, learned from other subjects' reveale
 954620 is not a predictor. It imports numpy, torch and sentence-transformers and loads all-MiniLM-L6-v2 through models.txt at import time, then predicts 0.5. If it finishes, those are available in the scoring container; if it fails, at least one is not.
 
 Results: 954619 (v3) scored 0.182867. Its sample is a fresh draw, so this one score sits within v2's spread (0.163 to 0.213) and does not separate v3 from v2 on the platform; the paired local comparison above is still the better evidence. 954620 (the probe) finished with 0.250000, so numpy, torch and sentence-transformers all load in the scoring container and a text embedding model is usable.
+
+## v4, text embedding neighbours, 2026-10-01
+
+`models/irt4.py` adds to v3 an offset shared between questions that read alike: each labelled observation leaves a residual against the model without item offsets, and a question takes a similarity weighted average of other questions' residuals on the same benchmark, from all-MiniLM-L6-v2 vectors, shrunk and scaled. `paired4.py` compares it with the offset switched off, which is v3, on identical draws (v3 scores 0.2146).
+
+Over 11 settings the best was 0.2143, a difference of 0.0003 with a standard error of 0.0002, which is no gain once the choice among 11 settings is counted. The offset helps on matharena (up to 0.0026) and a little on multi_swebench, and hurts on researchcodebench, whose items are long and open with shared text; stronger settings cost up to 0.0251 there. Centring the vectors on each benchmark's mean and embedding both ends of long items removed most of that damage (`tune4b.log`) but did not leave a gain. Not submitted; v3 stays the current model.
