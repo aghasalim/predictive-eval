@@ -1,0 +1,11 @@
+neighbours off (v3): mean 0.2146
+{'lam': 2.0, 'tau': 0.2, 'k_e': 0.5}: mean 0.2143  diff -0.0003 (se 0.0002)  better 12, worse 8 of 20
+   per benchmark: {'matharena': -0.0016, 'multi_swebench': -0.0006, 'real_webagents': -0.0001, 'researchcodebench': 0.0004, 'swe_rebench': 0.0004}
+{'lam': 4.0, 'tau': 0.2, 'k_e': 0.5}: mean 0.2148  diff +0.0002 (se 0.0005)  better 10, worse 10 of 20
+   per benchmark: {'matharena': -0.0026, 'multi_swebench': -0.001, 'real_webagents': -0.0, 'researchcodebench': 0.0038, 'swe_rebench': 0.0008}
+{'lam': 4.0, 'tau': 0.1, 'k_e': 0.1}: mean 0.2161  diff +0.0014 (se 0.0009)  better 11, worse 9 of 20
+   per benchmark: {'matharena': -0.0016, 'multi_swebench': -0.0003, 'real_webagents': -0.0001, 'researchcodebench': 0.0092, 'swe_rebench': 0.0001}
+{'lam': 2.0, 'tau': 0.3, 'k_e': 1.0}: mean 0.2144  diff -0.0002 (se 0.0002)  better 12, worse 8 of 20
+   per benchmark: {'matharena': -0.0011, 'multi_swebench': -0.0007, 'real_webagents': 0.0, 'researchcodebench': 0.0001, 'swe_rebench': 0.0008}
+{'lam': 4.0, 'tau': 0.3, 'k_e': 2.0}: mean 0.2144  diff -0.0002 (se 0.0002)  better 11, worse 9 of 20
+   per benchmark: {'matharena': -0.0016, 'multi_swebench': -0.0009, 'real_webagents': 0.0, 'researchcodebench': 0.0007, 'swe_rebench': 0.0009}
