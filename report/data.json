@@ -1,0 +1,57 @@
+{
+ "matharena": {
+  "response_type": "mixed",
+  "granularity": "item",
+  "used": true,
+  "subjects": 104,
+  "items": 1751,
+  "responses": 92861,
+  "pairs_80": 81,
+  "accuracy": 0.6539989877343556
+ },
+ "mmdocrag": {
+  "response_type": "fraction",
+  "granularity": "item",
+  "used": false
+ },
+ "multi_swebench": {
+  "response_type": "binary",
+  "granularity": "item",
+  "used": true,
+  "subjects": 82,
+  "items": 2126,
+  "responses": 57975,
+  "pairs_80": 82,
+  "accuracy": 0.1479430789133247
+ },
+ "real_webagents": {
+  "response_type": "binary",
+  "granularity": "item",
+  "used": true,
+  "subjects": 33,
+  "items": 233,
+  "responses": 4449,
+  "pairs_80": 26,
+  "accuracy": 0.3576084513373792
+ },
+ "researchcodebench": {
+  "response_type": "binary",
+  "granularity": "item",
+  "used": true,
+  "subjects": 31,
+  "items": 212,
+  "responses": 6784,
+  "pairs_80": 31,
+  "accuracy": 0.36129127358490565
+ },
+ "swe_rebench": {
+  "response_type": "binary",
+  "granularity": "item",
+  "used": true,
+  "subjects": 1,
+  "items": 6306,
+  "responses": 67074,
+  "pairs_80": 1,
+  "accuracy": 0.4794853445448311
+ }
+}
