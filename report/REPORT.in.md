@@ -1,6 +1,6 @@
 # A Shrunk Logistic Predictor for Cold Start Benchmarks
 
-Technical report for the NeurIPS 2026 Predictive AI Evaluation Competition, Codabench user aghasalim.
+Technical report for the NeurIPS 2026 Predictive AI Evaluation Competition, Codabench user aghasalim. Code: https://github.com/aghasalim/predictive-eval
 
 ## Summary
 
@@ -52,7 +52,7 @@ P(correct) = sigmoid(a_b + w theta_s + d_sb + g_b(tag_i) + b_i).
 
 **b_i, question offset (added in v3).** Each pair splits its items independently, so a question being predicted for one subject has often already been revealed for another. At budget 31, between 13% and 72% of evaluation items had a label from another subject on four of the five benchmarks (none on swe_rebench, which has one subject). The question's own offset is the MAP estimate from every revealed label on that exact question, keyed by benchmark id and question text, prior standard deviation 2.0.
 
-All MAP estimates use 8 Newton steps on the one dimensional posterior, fitted in the order a_b, g, d, b_i, each with the earlier terms fixed. The code is pure Python apart from pandas and numpy in fitting, and predicting one item takes well under a millisecond after the first call for a given set of labels, which is cached.
+All MAP estimates use 8 Newton steps on the one dimensional posterior, fitted in the order a_b, g, d, b_i, each with the earlier terms fixed. The code is pure Python apart from pandas and numpy in fitting, and the estimates for a given set of labels are computed once and cached.
 
 ## 4. Local results
 
@@ -103,6 +103,8 @@ The platform scores are lower than the local ones. The platform's benchmarks and
 - The question offset needs other subjects on the same benchmark in the same sample. If the platform scores pairs separately, v3 reduces to v2.
 
 ## 8. Reproducing
+
+Code: https://github.com/aghasalim/predictive-eval
 
 ```bash
 python -m venv .venv && .venv/bin/pip install pandas pyarrow numpy sentence-transformers
