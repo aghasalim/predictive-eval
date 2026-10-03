@@ -1,0 +1,6 @@
+A: 0.2146
+B {'sd_d': 1.5, 'sd_a': 1.0}: 0.2183  diff +0.0036 (se 0.0009)  better 3 worse 17
+C {'sd_d': 0.7}: 0.2146  diff -0.0000 (se 0.0006)  better 9 worse 11
+D {'sd_d': 2.0, 'sd_a': 1.0}: 0.2221  diff +0.0075 (se 0.0013)  better 1 worse 19
+E {'sd_d': 3.0, 'sd_a': 1.5}: 0.2306  diff +0.0160 (se 0.0020)  better 0 worse 20
+F {'sd_d': 1.5, 'sd_a': 1.0, 'sd_i': 3.0}: 0.2190  diff +0.0044 (se 0.0008)  better 0 worse 20
