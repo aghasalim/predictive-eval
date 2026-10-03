@@ -38,35 +38,33 @@ def submit(rounds):
             time.sleep(20)
 
 
-def budgets(sid):
-    """Mean Brier per label budget from the submission's detailed results, if published."""
-    try:
-        d = S.get(f"{BASE}/submissions/{sid}/get_details/", timeout=60).json()
-        url = d.get("detailed_result")
-        if not url:
-            return None
-        text = requests.get(url, timeout=60).text
-        return text
-    except Exception:
-        return None
-
-
 def collect():
+    """Mean platform ALC per arm, and ALC minus the pair's own budget 0 Brier, which
+    is the same model in every arm and so measures how hard each draw was."""
+    sys.path.insert(0, str(HERE))
+    from feedback import pairs
     rows = [json.loads(l) for l in open(LOG)]
-    out = []
+    by, adj, pending = {}, {}, 0
     for r in rows:
         s = S.get(f"{BASE}/submissions/{r['id']}/", timeout=60).json()
-        alc = next((float(x["score"]) for x in s.get("scores", []) if x.get("column_key") == "brier"), None)
-        out.append(r | {"status": s.get("status"), "alc": alc})
-    by = {}
-    for r in out:
-        if r["status"] == "Finished" and r["alc"] is not None:
-            by.setdefault(r["arm"], []).append(r["alc"])
-    for arm, xs in sorted(by.items()):
-        sd = st.stdev(xs) if len(xs) > 1 else float("nan")
-        print(f"{arm}: n {len(xs)}  mean ALC {st.mean(xs):.4f}  sd {sd:.4f}")
-    (HERE / "collected.json").write_text(json.dumps(out, indent=1))
-    print("pending:", sum(r["status"] not in ("Finished", "Failed") for r in out))
+        if s.get("status") != "Finished":
+            pending += s.get("status") not in ("Failed",)
+            continue
+        ps = pairs(r["id"])
+        if not ps:
+            continue
+        by.setdefault(r["arm"], []).append(sum(p["alc"] for p in ps.values()) / len(ps))
+        adj.setdefault(r["arm"], []).append(sum(p["alc"] - 0.1 * p[0] for p in ps.values()) / len(ps))
+    for arm in sorted(by):
+        xs, ys = by[arm], adj[arm]
+        sd = lambda v: st.stdev(v) if len(v) > 1 else float("nan")
+        print(f"{arm}: n {len(xs)}  ALC {st.mean(xs):.4f} (sd {sd(xs):.4f})  ALC minus 0.1 x B0 {st.mean(ys):.4f} (sd {sd(ys):.4f})")
+    for a, b in (("A", "B"), ("A", "C")):
+        if a in adj and b in adj and len(adj[a]) > 1 and len(adj[b]) > 1:
+            d = st.mean(adj[b]) - st.mean(adj[a])
+            se = (st.variance(adj[a]) / len(adj[a]) + st.variance(adj[b]) / len(adj[b])) ** 0.5
+            print(f"{b} minus {a}: {d:+.4f} (se {se:.4f})")
+    print("pending:", pending)
 
 
 if __name__ == "__main__":
