@@ -5,3 +5,5 @@ paiec_baseline/
 dist/
 __pycache__/
 *.log
+models/private_config.json
+models/llm_cache.json
