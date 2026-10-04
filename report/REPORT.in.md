@@ -84,9 +84,15 @@ Mean Brier score by label budget, averaged over all cells:
 | v2 | 953862, 953902, 953904, 953906, 953908 | 0.213320, 0.173103, 0.179449, 0.163046, 0.188681 |
 | v3 | 954619 | 0.182867 |
 
-Each submission is scored on a new sample, so I submitted v1 and v2 several times, alternating them. The means are 0.1944 for v1 and 0.1835 for v2, a difference of 0.0109 in v2's favour with a standard error of 0.0086. Subtracting each submission's own budget 0 score, which is the same model for both versions and so measures how hard the sample was, gives 0.0094 with a standard error of 0.0075. Both agree in direction with the local comparison but are only a little over one standard error. v3's single score lies inside v2's range, as expected for a change of 0.0025 locally. The leaderboard entry is 953904 (v2, 0.179449).
+Each submission is scored on a new sample, so I submitted v1 and v2 several times, alternating them. The means are 0.1944 for v1 and 0.1835 for v2, a difference of 0.0109 in v2's favour with a standard error of 0.0086. Subtracting each submission's own budget 0 score, which is the same model for both versions and so measures how hard the sample was, gives 0.0094 with a standard error of 0.0075. Both agree in direction with the local comparison but are only a little over one standard error. v3's single score lies inside v2's range, as expected for a change of 0.0025 locally. The leaderboard shows 953906 (v2, 0.163046), the best of the five v2 draws; the final ranking uses a common hidden test subset, so that draw says little on its own.
 
 The platform scores are lower than the local ones. The platform's benchmarks and subjects differ from measurement-db, and I cannot tell which part of the gap comes from that.
+
+### Tuning on the platform
+
+Because the final ranking uses a common hidden subset, I compared settings on the platform instead of choosing among single draws. Three arms of v3 that make identical predictions before any label is revealed: A as submitted, B adapting faster (sd_d 1.5, sd_a 1.0) and C adapting more slowly (sd_d 0.7). I submitted them in rotation, {arm_n} scored submissions in all ({arm_nA}, {arm_nB} and {arm_nC}). Each scoring log lists every pair's Brier ALC and its Brier at each budget, with subject and benchmark ids that stay fixed across submissions. I regressed each pair's ALC on that pair's own budget 0 Brier, which is the same model in every arm and so only measures how hard the pair is, plus arm indicators, with standard errors clustered by submission. Over {arm_pairs} pairs, B minus A is {arm_BA} and C minus A is {arm_CA}: neither arm differs from v3 by more than its standard error. Locally, every faster setting was worse than v3 (B by {loc_B}, and sd_d 3.0 by {loc_E}), so v3 stays.
+
+The same logs show where the error is. Over {prof_n} pair results, the mean Brier is {prof_0} at budget 0, {prof_1} at budget 1, {prof_7} at budget 7 and {prof_31} at budget 31, and it flattens near the end. By budget 31 the model knows each subject's accuracy on the benchmark well; what remains is not knowing which items are hard, which no shrinkage setting can fix.
 
 ## 6. What did not work
 
@@ -111,8 +117,10 @@ python -m venv .venv && .venv/bin/pip install pandas pyarrow numpy sentence-tran
 ./fetch.sh                                  # measurement-db (gated) and the organisers' baselines
 .venv/bin/python report/data_summary.py      # Section 1 table
 .venv/bin/python report/local_scores.py      # Section 4 tables, about 20 minutes on a laptop CPU
-.venv/bin/python report/check_report.py      # every number in this report, recomputed
-.venv/bin/python repeats.py                  # Section 5 comparison
+.venv/bin/python repeats.py                  # Section 5 comparison of v1 and v2
+.venv/bin/python arms/analyse.py             # Section 5 tuning arms (scoring logs cached in arms/logs/)
+.venv/bin/python arms/budget_profile.py      # Section 5 error by budget
+.venv/bin/python report/build_report.py      # fills this report and checks every number in it
 ```
 
 The submitted archives are built from `submission/`, `submission2/` and `submission3/`, each a `model.py` with its fitted parameters in JSON. The empirical mean baseline is the organisers' `empirical_mean/model.py` from aims-foundations/paiec_baseline.

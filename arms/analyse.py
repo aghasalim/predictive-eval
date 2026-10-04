@@ -27,5 +27,9 @@ for sid in {x[1] for x in rows}:
     meat += np.outer(g, g)
 se = np.sqrt(np.diag(XtX @ meat @ XtX))
 print(f"pairs {len(rows)}, submissions {len({x[1] for x in rows})}, slope on budget 0 Brier {beta[1]:.3f}")
+out = {"pairs": len(rows), "submissions": len({x[1] for x in rows}), "slope": float(beta[1]),
+       "per_arm_submissions": {a: len({x[1] for x in rows if x[0] == a}) for a in arms}}
 for j, a in enumerate(arms[1:], start=2):
     print(f"{a} minus {arms[0]}: {beta[j]:+.4f} (se {se[j]:.4f})")
+    out[f"{a}-{arms[0]}"] = {"diff": float(beta[j]), "se": float(se[j])}
+json.dump(out, open("arms/analysis.json", "w"), indent=1)

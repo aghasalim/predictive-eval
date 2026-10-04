@@ -1,0 +1,99 @@
+Formative feedback
+
+ALC summary
+
+subject_id      Benchmark         Number of Unique Subject-Item Pairs  Brier ALC  Calibration ECE
+--------------  ----------------  -----------------------------------  ---------  ---------------
+subject_179711  benchmark_213669  58                                   0.228054   0.200645
+subject_288525  benchmark_869474  56                                   0.186400   0.140829
+subject_322568  benchmark_893575  44                                   0.239355   0.248009
+subject_359988  benchmark_893575  44                                   0.278245   0.164675
+subject_488357  benchmark_869474  56                                   0.257070   0.068526
+subject_510081  benchmark_800730  54                                   0.055261   0.164730
+subject_556050  benchmark_342307  60                                   0.260483   0.122430
+subject_681510  benchmark_119137  44                                   0.298122   0.200138
+subject_786151  benchmark_830060  71                                   0.116886   0.146260
+
+Label budget: 0
+
+subject_id      Benchmark         Number of Unique Subject-Item Pairs  Brier score  Calibration ECE
+--------------  ----------------  -----------------------------------  -----------  ---------------
+subject_179711  benchmark_213669  58                                   0.323058     0.374089
+subject_288525  benchmark_869474  56                                   0.196320     0.174710
+subject_322568  benchmark_893575  44                                   0.224465     0.265856
+subject_359988  benchmark_893575  44                                   0.269370     0.163794
+subject_488357  benchmark_869474  56                                   0.266851     0.130701
+subject_510081  benchmark_800730  54                                   0.152141     0.366013
+subject_556050  benchmark_342307  60                                   0.253921     0.126572
+subject_681510  benchmark_119137  44                                   0.259653     0.122238
+subject_786151  benchmark_830060  71                                   0.207914     0.345026
+
+Label budget: 1
+
+subject_id      Benchmark         Number of Unique Subject-Item Pairs  Brier score  Calibration ECE
+--------------  ----------------  -----------------------------------  -----------  ---------------
+subject_179711  benchmark_213669  58                                   0.231223     0.217124
+subject_288525  benchmark_869474  56                                   0.180218     0.120090
+subject_322568  benchmark_893575  44                                   0.422066     0.522831
+subject_359988  benchmark_893575  44                                   0.261819     0.129830
+subject_488357  benchmark_869474  56                                   0.249849     0.009017
+subject_510081  benchmark_800730  54                                   0.088757     0.265672
+subject_556050  benchmark_342307  60                                   0.306320     0.261573
+subject_681510  benchmark_119137  44                                   0.305185     0.245915
+subject_786151  benchmark_830060  71                                   0.136503     0.203599
+
+Label budget: 3
+
+subject_id      Benchmark         Number of Unique Subject-Item Pairs  Brier score  Calibration ECE
+--------------  ----------------  -----------------------------------  -----------  ---------------
+subject_179711  benchmark_213669  58                                   0.194516     0.144447
+subject_288525  benchmark_869474  56                                   0.198537     0.180943
+subject_322568  benchmark_893575  44                                   0.258148     0.331038
+subject_359988  benchmark_893575  44                                   0.275411     0.155926
+subject_488357  benchmark_869474  56                                   0.250069     0.017340
+subject_510081  benchmark_800730  54                                   0.046995     0.169764
+subject_556050  benchmark_342307  60                                   0.238318     0.020455
+subject_681510  benchmark_119137  44                                   0.375869     0.362158
+subject_786151  benchmark_830060  71                                   0.101494     0.088172
+
+Label budget: 7
+
+subject_id      Benchmark         Number of Unique Subject-Item Pairs  Brier score  Calibration ECE
+--------------  ----------------  -----------------------------------  -----------  ---------------
+subject_179711  benchmark_213669  58                                   0.229031     0.214625
+subject_288525  benchmark_869474  56                                   0.177399     0.107715
+subject_322568  benchmark_893575  44                                   0.171925     0.145888
+subject_359988  benchmark_893575  44                                   0.306893     0.208487
+subject_488357  benchmark_869474  56                                   0.261775     0.109577
+subject_510081  benchmark_800730  54                                   0.027433     0.096217
+subject_556050  benchmark_342307  60                                   0.267004     0.170598
+subject_681510  benchmark_119137  44                                   0.308312     0.252192
+subject_786151  benchmark_830060  71                                   0.096425     0.098806
+
+Label budget: 15
+
+subject_id      Benchmark         Number of Unique Subject-Item Pairs  Brier score  Calibration ECE
+--------------  ----------------  -----------------------------------  -----------  ---------------
+subject_179711  benchmark_213669  58                                   0.227295     0.209294
+subject_288525  benchmark_869474  56                                   0.183201     0.131926
+subject_322568  benchmark_893575  44                                   0.158033     0.099027
+subject_359988  benchmark_893575  44                                   0.269410     0.159997
+subject_488357  benchmark_869474  56                                   0.264577     0.121691
+subject_510081  benchmark_800730  54                                   0.020453     0.047724
+subject_556050  benchmark_342307  60                                   0.244360     0.080376
+subject_681510  benchmark_119137  44                                   0.246786     0.045558
+subject_786151  benchmark_830060  71                                   0.095820     0.110605
+
+Label budget: 31
+
+subject_id      Benchmark         Number of Unique Subject-Item Pairs  Brier score  Calibration ECE
+--------------  ----------------  -----------------------------------  -----------  ---------------
+subject_179711  benchmark_213669  58                                   0.193358     0.061384
+subject_288525  benchmark_869474  56                                   0.188972     0.152235
+subject_322568  benchmark_893575  44                                   0.148746     0.016662
+subject_359988  benchmark_893575  44                                   0.286017     0.174475
+subject_488357  benchmark_869474  56                                   0.251313     0.039308
+subject_510081  benchmark_800730  54                                   0.033190     0.122532
+subject_556050  benchmark_342307  60                                   0.238906     0.031718
+subject_681510  benchmark_119137  44                                   0.249266     0.067492
+subject_786151  benchmark_830060  71                                   0.100461     0.115208
