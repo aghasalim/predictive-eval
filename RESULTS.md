@@ -51,3 +51,13 @@ Results: 954619 (v3) scored 0.182867. Its sample is a fresh draw, so this one sc
 `models/irt4.py` adds to v3 an offset shared between questions that read alike: each labelled observation leaves a residual against the model without item offsets, and a question takes a similarity weighted average of other questions' residuals on the same benchmark, from all-MiniLM-L6-v2 vectors, shrunk and scaled. `paired4.py` compares it with the offset switched off, which is v3, on identical draws (v3 scores 0.2146).
 
 Over 11 settings the best was 0.2143, a difference of 0.0003 with a standard error of 0.0002, which is no gain once the choice among 11 settings is counted. The offset helps on matharena (up to 0.0026) and a little on multi_swebench, and hurts on researchcodebench, whose items are long and open with shared text; stronger settings cost up to 0.0251 there. Centring the vectors on each benchmark's mean and embedding both ends of long items removed most of that damage (`tune4b.log`) but did not leave a gain. Not submitted; v3 stays the current model.
+
+## Shrinkage arms on the platform, 2026-10-04
+
+The final ranking uses a common hidden test subset, not the leaderboard, so I compared settings on the platform rather than picking the luckiest draw. Three arms of v3 that make identical predictions with no labels: A as submitted, B adapting faster (sd_d 1.5, sd_a 1.0), C slower (sd_d 0.7). 43 submissions in rotation (`arms/run_arms.py`); 42 were scored, one failed.
+
+Each submission's scoring log gives every pair's Brier ALC and per-budget Brier (`arms/feedback.py`). `arms/analyse.py` regresses pair ALC on the pair's own budget 0 Brier, which is the same model in every arm, plus arm indicators, with standard errors clustered by submission. On 367 pairs: B minus A -0.0049 (se 0.0046), C minus A +0.0024 (se 0.0047). Neither is distinguishable from v3.
+
+Locally (`arms/local_arms.py`, `arms/local_arms.log`) every faster setting was worse than v3: B +0.0036 (se 0.0009, worse in 17 of 20 cells), up to +0.0160 for sd_d 3.0. v3 stays the model.
+
+The same logs show where the error is. Over 157 pair results from earlier submissions, mean Brier falls from 0.225 at budget 0 to 0.162 at budget 31 and flattens there: with 31 labels the model knows each subject's accuracy well, and what is left is not knowing which items are hard.
