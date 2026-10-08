@@ -252,6 +252,11 @@ load()
 _cfg = HERE / "private_config.json"
 if _cfg.exists():
     CONFIG.update(json.loads(_cfg.read_text()))
+_env = HERE.parent / ".env"
+if not CONFIG.get("api_key") and _env.exists():
+    for _line in _env.read_text().splitlines():
+        if _line.startswith("OPENAI_API_KEY=") and _line.split("=", 1)[1].strip():
+            CONFIG["api_key"] = _line.split("=", 1)[1].strip().strip("'\"")
 _cache_file = HERE / "llm_cache.json"
 if _cache_file.exists():
     _llm.update(json.loads(_cache_file.read_text()))
