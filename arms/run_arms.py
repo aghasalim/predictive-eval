@@ -30,7 +30,7 @@ def submit(rounds):
         for arm in "ABC":
             out = subprocess.run([sys.executable, str(SUBMIT), str(HERE / f"arm_{arm}.zip")],
                                  capture_output=True, text=True).stdout
-            m = __import__("re").search(r"Submission created: (\d+)", out)
+            m = __import__("re").search(r"Submission(?: created)?: (\d+)", out)
             sid = int(m.group(1)) if m else None
             with open(LOG, "a") as f:
                 f.write(json.dumps({"arm": arm, "id": sid, "round": r}) + "\n")
