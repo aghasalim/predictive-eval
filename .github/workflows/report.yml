@@ -1,0 +1,18 @@
+name: report
+on:
+  push:
+    branches: [main]
+  pull_request:
+jobs:
+  report:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+      # build_report.py is stdlib only. It fills REPORT.md from the committed
+      # JSON and fails if a hand-typed number has no source; the diff then fails
+      # if the committed REPORT.md is out of date.
+      - run: python report/build_report.py
+      - run: git diff --exit-code report/REPORT.md
