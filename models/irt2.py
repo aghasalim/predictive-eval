@@ -2,7 +2,8 @@
 
 h(item)   a ridge regression from cheap text features to how much harder or
           easier an item is than its benchmark's average, fitted on the
-          training benchmarks, so it works at budget 0
+          training benchmarks, so it works at budget 0 (switched off by
+          default, h_scale 0, as submitted, because it did not transfer)
 g_b(tag)  an online offset for items sharing the same item_features tag on
           the held-out benchmark (for example lang=c++), estimated from the
           revealed labels and shrunk towards 0
@@ -17,7 +18,7 @@ from pathlib import Path
 
 HERE = Path(__file__).parent
 PARAMS = {"mu0": -0.3, "sd_a": 0.7, "sd_d": 1.0, "w": 0.5, "sd_theta": 1.0,
-          "sd_g": 0.5, "h_scale": 1.0, "ridge": 10.0}
+          "sd_g": 1.0, "h_scale": 0.0, "ridge": 10.0}
 THETA = {}
 COEF = []
 _cache = {}

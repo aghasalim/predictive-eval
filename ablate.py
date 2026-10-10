@@ -12,7 +12,7 @@ for name, over in variants.items():
     per = {}
     for held in benches:
         m = sim.load_model("models/irt2.py", [b for b in benches if b != held])
-        m.PARAMS.update(over)
+        m.PARAMS.update({"sd_g": 0.5, "h_scale": 1.0, **over})  # the defaults this ablation ran with
         m._cache.clear()
         per[held] = round(sim.score(m, held, n_rounds=10, seed=0)[0], 4)
     print(f"{name:26} mean {sum(per.values()) / len(per):.4f}  {per}", flush=True)
