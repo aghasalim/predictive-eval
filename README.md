@@ -19,7 +19,7 @@ Lower is better. Local scores hold out one benchmark at a time on the public mea
 ```bash
 python -m venv .venv && .venv/bin/pip install pandas pyarrow numpy sentence-transformers
 ./fetch.sh                                   # gated data (accept the terms on Hugging Face first) and the organisers' baselines
-.venv/bin/python sim.py models/irt3.py       # local score of one model
+.venv/bin/python sim.py models/irt3.py       # local score of one model (seed 0, 20 rounds, so not the table's numbers)
 .venv/bin/python report/local_scores.py      # every model on the same draws, about 20 minutes on a laptop CPU
 .venv/bin/python report/build_report.py      # fills the report and checks every number in it
 ```
