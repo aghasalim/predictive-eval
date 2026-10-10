@@ -21,7 +21,7 @@ from pathlib import Path
 
 HERE = Path(__file__).parent
 PARAMS = {"mu0": -0.3, "sd_a": 0.7, "sd_d": 1.0, "w": 0.5, "sd_theta": 1.0,
-          "sd_g": 1.0, "h_scale": 0.0, "ridge": 10.0, "sd_i": 1.0}
+          "sd_g": 1.0, "h_scale": 0.0, "ridge": 10.0, "sd_i": 2.0}
 THETA = {}
 COEF = []
 _cache = {}
