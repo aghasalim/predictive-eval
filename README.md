@@ -14,6 +14,18 @@ The model is a small shrunk logistic predictor. Ability by model name comes from
 
 Lower is better. Local scores hold out one benchmark at a time on the public measurement-db release (`sim.py`); each platform submission is scored on a fresh sample of about nine pairs, so single platform scores are noisy. `RESULTS.md` is the running log, and the report covers two text based ideas that did not help.
 
+![Local Brier score by label budget](report/fig_budget.png)
+
+Local mean Brier score at each label budget for every model, on the same held-out draws (`report/local_scores.json`).
+
+![Paired local differences](report/fig_paired.png)
+
+Each model change against the one before it on identical draws, with a 95% interval from the paired standard error, and how many of the 20 cells got better or worse.
+
+![Benchmarks used locally](report/fig_data.png)
+
+The five binary benchmarks the local simulation holds out in turn: responses, subjects, items and the share answered correctly (`report/data.json`).
+
 ## Running it
 
 ```bash
@@ -22,6 +34,7 @@ python -m venv .venv && .venv/bin/pip install pandas pyarrow numpy sentence-tran
 .venv/bin/python sim.py models/irt3.py       # local score of one model (seed 0, 20 rounds, so not the table's numbers)
 .venv/bin/python report/local_scores.py      # every model on the same draws, about 20 minutes on a laptop CPU
 .venv/bin/python report/build_report.py      # fills the report and checks every number in it
+.venv/bin/python report/make_figures.py      # the README figures, from the committed JSON
 ```
 
 `submission/`, `submission2/` and `submission3/` are the archives as submitted: a `model.py` and its fitted parameters. The data is not included; `fetch.sh` downloads it.
