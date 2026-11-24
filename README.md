@@ -1,5 +1,3 @@
-<p align="center"><img src="assets/banner.jpg" alt="Line drawing of a calibration plot whose dots bend away from the diagonal reference line" width="100%"></p>
-
 # predictive-eval
 
 My entry to the NeurIPS 2026 Predictive AI Evaluation Competition on Codabench: predict whether an AI system answers a benchmark item correctly, on a benchmark it was never trained on, while a few labels are revealed at a time.
